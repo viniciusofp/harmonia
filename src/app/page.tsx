@@ -4,14 +4,16 @@ import ToneSelect from './components/ToneSelect';
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-4 max-w-sm mx-auto py-8">
+    <div className="flex flex-col gap-4 max-w-sm mx-auto py-4">
       <h1 className="px-2 font-black text-lg">
         Guia Básico de Harmonia Musical
       </h1>
       <Piano />
       <ToneSelect />
-      <Scales />
-      <div className="text-xs text-muted-foreground mt-12">
+      <div className="px-2">
+        <Scales />
+      </div>
+      <div className="text-xs text-muted-foreground text-center">
         Desenvolvido por{' '}
         <a
           href="https://viniciusofp.com.br"

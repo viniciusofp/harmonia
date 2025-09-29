@@ -47,44 +47,40 @@ export default function Piano(props: PianoProps) {
   }, [toneId, scaleName]);
   return (
     <>
-      <div className="flex justify-center px-4 gap-0.5">
-        {octaves.map((octave) => {
-          return notesStartingByTone(toneId || 0).map((note) => {
-            return (
-              <Button
-                key={JSON.stringify(octave) + 'note1' + note.id}
-                variant={typeof note.name === 'string' ? 'outline' : 'default'}
-                onClick={() => {
-                  playNote(getFrequency(note.distanceToA + octave), 8);
-                }}
-                className={cn(
-                  'w-[calc(100%/8)] h-56 text-xs items-end hover:bg-neutral-100 active:bg-neutral-200 duration-150 text-neutral-500 relative',
-                  typeof note.name !== 'string' &&
-                    'w-[calc(80%/8)] h-36 -ml-[calc(40%/8)] -mr-[calc(40%/7.5)] z-2 border-white border hover:bg-neutral-800 active:bg-neutral-700'
-                )}
-              >
-                {scale && scale.includes(note.id) && (
-                  <span
-                    className={cn(
-                      'h-8 w-8 rounded-full flex items-center justify-center shrink-0 text-white',
+      <div className="flex justify-center px-4">
+        {notesStartingByTone(toneId || 0).map((note) => {
+          return (
+            <Button
+              key={'note1' + note.id}
+              variant={typeof note.name === 'string' ? 'outline' : 'default'}
+              onClick={() => {
+                playNote(getFrequency(note.distanceToA), 8);
+              }}
+              className={cn(
+                'w-7 p-0 pb-1 h-32 text-xs items-end hover:bg-neutral-100 active:bg-neutral-200 duration-150 text-neutral-500 relative',
+                typeof note.name !== 'string' &&
+                  'w-6 h-20 -ml-3 -mr-3 z-2 border-white border hover:bg-neutral-800 active:bg-neutral-700'
+              )}
+            >
+              {scale && scale.includes(note.id) && (
+                <span
+                  className={cn(
+                    'size-6 rounded-full flex items-center justify-center shrink-0 text-white',
 
-                      scaleName === 'Maior'
-                        ? 'bg-red-500/50'
-                        : 'bg-blue-500/50',
-                      toneId === note.id &&
-                        (scaleName === 'Maior' ? 'bg-red-500' : 'bg-blue-500')
-                    )}
-                  >
-                    {typeof note.symbol === 'string'
-                      ? note.symbol
-                      : note.symbol[
-                          sharpOrFlat(toneId || 0, scaleName || 'Maior')
-                        ]}
-                  </span>
-                )}
-              </Button>
-            );
-          });
+                    scaleName === 'Maior' ? 'bg-red-500/50' : 'bg-blue-500/50',
+                    toneId === note.id &&
+                      (scaleName === 'Maior' ? 'bg-red-500' : 'bg-blue-500')
+                  )}
+                >
+                  {typeof note.symbol === 'string'
+                    ? note.symbol
+                    : note.symbol[
+                        sharpOrFlat(toneId || 0, scaleName || 'Maior')
+                      ]}
+                </span>
+              )}
+            </Button>
+          );
         })}
         {toneId !== null && (
           <Button
@@ -95,14 +91,14 @@ export default function Piano(props: PianoProps) {
               playNote(getFrequency(noteMap[toneId].distanceToA + 12), 8);
             }}
             className={cn(
-              'w-[calc(100%/7.5)] h-56 text-xs items-end  hover:bg-neutral-100 active:bg-neutral-200 duration-150 relative text-white',
+              'w-7 p-0 pb-1 h-32 text-xs items-end  hover:bg-neutral-100 active:bg-neutral-200 duration-150 relative text-white',
               typeof noteMap[toneId].name !== 'string' &&
-                'w-[calc(80%/7.5)] h-36 -ml-[calc(40%/7.5)] -mr-[calc(40%/7.5)] z-2 border-white border hover:bg-neutral-800 active:bg-neutral-700 '
+                'w-6 h-20 -ml-3 -mr-3 z-2 border-white border hover:bg-neutral-800 active:bg-neutral-700 '
             )}
           >
             <div
               className={cn(
-                'h-8 w-8 rounded-full flex items-center justify-center shrink-0 text-white',
+                'size-6 rounded-full flex items-center justify-center shrink-0 text-white',
                 scale && (scaleName === 'Maior' ? 'bg-red-500' : 'bg-blue-500')
               )}
             >
