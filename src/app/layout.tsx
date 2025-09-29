@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Guia Básico de Harmonia Musical'
+  title: 'Colinha de Harmonia Musical'
 };
 
 export default function RootLayout({
