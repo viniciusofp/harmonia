@@ -16,9 +16,8 @@ export default function Explainer(props: ExplainerProps) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          size={'sm'}
           variant="outline"
-          className="w-fit mx-auto bg-transparent text-xs text-muted-foreground"
+          className="bg-transparent text-xs text-muted-foreground"
         >
           O que é isto?
         </Button>
@@ -26,7 +25,7 @@ export default function Explainer(props: ExplainerProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Colinha de harmonia musical</DialogTitle>
-          <DialogDescription className="grid gap-4">
+          <div className="grid gap-3 text-sm">
             <p>
               Criei esse app como forma de me auxiliar no meu estudo de harmonia
               musical, cujo principal motivo é tocar samba. Tentei resumir em um
@@ -38,7 +37,7 @@ export default function Explainer(props: ExplainerProps) {
               encontrado alguma coisa errada e queira me dar um toque enviando
               um email para viniciusofp@gmail.com, eu agradeço.
             </p>
-          </DialogDescription>
+          </div>
         </DialogHeader>
       </DialogContent>
     </Dialog>
