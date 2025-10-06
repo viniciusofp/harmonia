@@ -1,16 +1,21 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { cn, noteMap } from '@/lib/utils';
+import { Moon, PianoIcon, Sun } from 'lucide-react';
 import { useState } from 'react';
 import Explainer from './components/Explainer';
-import Piano from './components/Piano';
 import Scales from './components/Scales';
-import ToneSelect from './components/ToneSelect';
-import { Button } from '@/components/ui/button';
-import { Sun, Moon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import Share from './components/Share';
+import ToneSelect from './components/ToneSelect';
+import { Card, CardContent } from '@/components/ui/card';
+import { useToneStore } from '@/lib/store';
+import Piano from './components/Piano';
 
 export default function Home() {
+  const [showPiano, setShowPiano] = useState<boolean>(false);
   const [lightMode, setLightMode] = useState<'dark' | 'light'>('light');
+
+  const { toneId, scaleName } = useToneStore();
   return (
     <div
       className={cn(
@@ -22,10 +27,52 @@ export default function Home() {
         <h1 className="px-2 text-lg leading-none font-bold">
           Colinha de Harmonia Musical
         </h1>
-        {/* <Piano /> */}
         <ToneSelect />
         <div className="px-2">
-          <Scales />
+          <Card className="py-2">
+            <CardContent className="p-2">
+              <div className="flex flex-col gap-2">
+                <div className="flex justify-between items-center px-2">
+                  <div
+                    className="
+                  "
+                  >
+                    <p className="font-bold text-xl">
+                      {toneId !== null &&
+                        (typeof noteMap[toneId].name === 'string'
+                          ? noteMap[toneId].name
+                          : noteMap[toneId].name.join('/'))}{' '}
+                      {scaleName}
+                    </p>
+                    {toneId !== null && (
+                      <p className="text-sm font-medium text-muted-foreground">
+                        {scaleName !== 'Maior' &&
+                          (typeof noteMap[(toneId! + 3) % 12].name === 'string'
+                            ? noteMap[(toneId! + 3) % 12].name + ' Maior'
+                            : noteMap[(toneId! + 3) % 12].name[1] + ' Maior')}
+                        {scaleName === 'Maior' &&
+                          (typeof noteMap[(toneId! + 9) % 12].name === 'string'
+                            ? noteMap[(toneId! + 9) % 12].name + ' Menor'
+                            : noteMap[(toneId! + 9) % 12].name[1] + ' Menor')}
+                      </p>
+                    )}
+                  </div>
+                  <Button
+                    variant={'ghost'}
+                    onClick={() => setShowPiano((v) => !v)}
+                  >
+                    {showPiano ? 'Esconder' : 'Exibir'} piano <PianoIcon />
+                  </Button>
+                </div>
+                {showPiano && (
+                  <div className="mt-2">
+                    <Piano />
+                  </div>
+                )}
+                <Scales />
+              </div>
+            </CardContent>
+          </Card>
         </div>
         <div className="flex justify-between items-center gap-2 px-2">
           <div className="flex gap-2 items-center">
