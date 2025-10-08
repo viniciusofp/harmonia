@@ -93,7 +93,6 @@ export default function Scales(props: ScalesProps) {
           scaleName === 'Maior' && (
             <div className="grid grid-cols-7 w-full ">
               {[0, 1, 2, 3, 4, 5, 6].map((n) => {
-                const currentTone = noteMap[scale[n]];
                 const isMinor =
                   chords[n].includes('m') || chords[n].includes('Ø');
                 const relToneId = isMinor
@@ -115,7 +114,7 @@ export default function Scales(props: ScalesProps) {
                       {chords[isMinor ? 6 : 1]}
                     </p>
                     <p className="text-muted-foreground text-base">
-                      {typeof noteMap[relScale[isMinor ? 6 : 1]].symbol ===
+                      {typeof noteMap[relScale[isMinor ? 2 : 4]].symbol ===
                       'string'
                         ? noteMap[relScale[isMinor ? 2 : 4]].symbol
                         : noteMap[relScale[isMinor ? 2 : 4]].symbol[
@@ -134,8 +133,8 @@ export default function Scales(props: ScalesProps) {
           scaleName === 'Menor' && (
             <div className="grid grid-cols-7 w-full ">
               {[0, 1, 2, 3, 4, 5, 6].map((n) => {
-                const currentTone = noteMap[scale[n]];
-                const isMinor = chords[n].includes('m');
+                const isMinor =
+                  chords[n].includes('m') || chords[n].includes('Ø');
                 const relToneId = isMinor
                   ? noteMap[(scale[n] + 3) % 12].id
                   : noteMap[scale[n]].id;

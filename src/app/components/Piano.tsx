@@ -15,7 +15,6 @@ import { useEffect, useMemo, useState } from 'react';
 export type PianoProps = {};
 
 const tempo = 100;
-const octaves = [0];
 export default function Piano(props: PianoProps) {
   const { toneId, scaleName } = useToneStore();
   const [audioCtx, setAudioCtx] = useState<AudioContext>();
@@ -26,10 +25,13 @@ export default function Piano(props: PianoProps) {
       setAudioCtx(ctx);
     }
   }, []);
-  function playNote(frequency: number, duration: number) {
+  async function playNote(frequency: number, duration: number) {
     if (!audioCtx) return;
+    if (audioCtx.state === 'suspended') {
+      await audioCtx.resume();
+      alert('AudioContext resumed!');
+    }
     // create Oscillator node
-    console.log(frequency);
     var oscillator = audioCtx.createOscillator();
     oscillator.type = 'sine';
     oscillator.frequency.value = frequency; // value in hertz
